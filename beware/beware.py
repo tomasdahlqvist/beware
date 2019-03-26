@@ -219,9 +219,15 @@ class ListReservations(Resource):
         for r in reservations:
             if r.endTs < nowTime:
                 r.state = 3
-
-            if r.startTs > nowTime + 86400*max_res:
+            elif r.startTs > nowTime + 86400*max_res:
                 r.state = 3
+            elif obj == 2:
+                if r.start.weekday() == 1 and r.start.hour == 8:
+                    r.state = 3
+                elif r.start.weekday() == 4 and r.start.hour == 8:
+                    r.state = 3
+                elif r.start.weekday() == 2 and (r.start.hour == 20 or r.start.hour == 21 or r.start.hour == 22):
+                    r.state = 3
         
         nextTs = myTime + 86400 * 7
         prevTs = myTime - 86400 * 7
