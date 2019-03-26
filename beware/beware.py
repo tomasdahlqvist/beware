@@ -208,9 +208,19 @@ class ListReservations(Resource):
             request.finish()
             return
         
+        if obj == 1:
+            max_res = 30
+        elif obj == 2:
+            max_res = 14
+        else:
+            max_res = 185
+
         # Mark reservations in the past as "3".
         for r in reservations:
             if r.endTs < nowTime:
+                r.state = 3
+
+            if r.startTs > nowTime + 86400*max_res:
                 r.state = 3
         
         nextTs = myTime + 86400 * 7
