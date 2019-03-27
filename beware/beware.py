@@ -226,7 +226,7 @@ class ListReservations(Resource):
                     r.state = 3
                 elif r.start.weekday() == 4 and r.start.hour == 8:
                     r.state = 3
-                elif r.start.weekday() == 2 and (r.start.hour == 20 or r.start.hour == 21 or r.start.hour == 22):
+                elif r.start.weekday() == 2 and (r.start.hour == 19 or r.start.hour == 20 or r.start.hour == 21 or r.start.hour == 22):
                     r.state = 3
         
         nextTs = myTime + 86400 * 7
